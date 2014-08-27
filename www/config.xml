@@ -7,9 +7,9 @@
     xmlns:gap="http://phonegap.com/ns/1.0">
     <name>NVR Viewer</name>
     <description>
-        Linux NVR Mobile Viewer.
+	You can view live camera images with this mobile viewer from NVR.
 
-        You can view live cameras with this mobile viewer. PTZ control, search and other features will be supported in the next versions.
+	PTZ control, search and other features will be supported in the next version.
     </description>
     <author>
         NVR Manufacturer
