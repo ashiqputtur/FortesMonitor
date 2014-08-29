@@ -38,6 +38,7 @@
       if (NR_IMAGE_BUFFERS > 0) {
         if (!self.images[self.imageIdx]) {
           self.images[self.imageIdx] = new Image();
+          self.images[self.imageIdx].crossOrigin = 'anonymous';
         }
         image = self.images[self.imageIdx];
         self.imageIdx = (self.imageIdx + 1) % NR_IMAGE_BUFFERS;

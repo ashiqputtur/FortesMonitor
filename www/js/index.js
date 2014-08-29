@@ -68,7 +68,7 @@ $(document).on('mobileinit', function () {
     function createDeviceItem(device) {
       var content = '<li>' +
         '<a href="#" data-uuid="' + device.uuid + '" class="device-list-item">' +
-        '<img src="images/device-face.png">' +
+        '<img src="' + mvDevice.getThumbnail(device.uuid) + '">' +
         '<h2>' + device.name + '</h2>' +
         '<p>' + device.address + ' / ' + device.user + '</p>' +
         '</a>' +
@@ -177,6 +177,7 @@ $(document).on('mobileinit', function () {
         $('[data-uuid="' + uuid + '"].device-list-item h2').html(device.name);
         var desc = device.address + ' / ' + device.user;
         $('[data-uuid="' + uuid + '"].device-list-item p').html(desc);
+        $('[data-uuid="' + uuid + '"].device-list-item img').attr('src', device.thumbnail);
       }
     };
   });
@@ -348,6 +349,24 @@ $(document).on('mobileinit', function () {
     }
   }
 
+  // Save the canvas image data of thumbnail size.
+  function saveThumbnail(uuid, image) {
+    if (!uuid)
+      return;
+    var saveCanvas = document.getElementById('image-live-save-canvas');
+    var ctx = saveCanvas.getContext("2d");
+
+    saveCanvas.width = 120;
+    saveCanvas.height = 65;
+    ctx.drawImage(image,
+                  0,
+                  0,
+                  saveCanvas.width,
+                  saveCanvas.height);
+
+    mvDevice.setThumbnail(uuid, saveCanvas.toDataURL());
+  }
+
   // Image Live page
   $(document).on('pagecreate', '#image-live-page', function () {
 
@@ -357,6 +376,8 @@ $(document).on('mobileinit', function () {
       if (!image)
         return;
       imageLive.stop();
+
+      saveThumbnail(currentDevice.uuid, image);
       
       var saveCanvas = document.getElementById('image-live-save-canvas');
       var ctx = saveCanvas.getContext("2d");
@@ -520,9 +541,13 @@ $(document).on('mobileinit', function () {
       'isPhoneGap': isPhoneGap
     }, config, currentDevice));
     imageLive.ondraw = function (image, cam) {
-  
+
       if (imageLivePanelIsAnimating)
         return;
+
+      if (!currentDevice.thumbnail) {
+        saveThumbnail(currentDevice.uuid, image);
+      }
 
       ctx.drawImage(image,
                     cam.rect.x + 1, 

@@ -63,9 +63,12 @@ a {
 /* Set the position of device snapshot image. */
 .device-list-item img {
   position: absolute;
+  width: 120px;
+  height: 65px;
   top: 0;
   bottom: 0;
   margin: auto;
+  padding: .2em .2em;
 }
 
 /* Remove the margin and padding of image live content. */
