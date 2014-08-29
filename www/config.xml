@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget
     id="com.emstone.moview"
-    version="1.2.0"
+    version="1.2.1"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:gap="http://phonegap.com/ns/1.0">
@@ -35,6 +35,10 @@
     <gap:plugin name="org.wbt11a.canvas2imageplugin" version="0.7.0" />
     <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+
+    <gap:config-file platform="ios" parent="CFBundleShortVersionString">
+        <string>1.2.1</string>
+    </gap:config-file>
 
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
