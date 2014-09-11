@@ -87,10 +87,10 @@ $(document).on('mobileinit', function () {
     var filterchk = false;
     $('#search-button').click(function () {
       if (filterchk) {
-        deviceListView.filterable('destroy');
+        $('#device-list-main').filterable('destroy');
         filterchk = false;
       } else {
-        deviceListView.filterable({
+        $('#device-list-main').filterable({
           create: function () {
             filterchk = true;
           }
