@@ -54,14 +54,8 @@ $(document).on('mobileinit', function () {
   // On Samsung Galaxy S4 and G pro, swiperight event has bug.
   $.event.special.swipe.scrollSupressionThreshold = 5;
 
-  // Disable all jQuery Mobile animation effects.
-  // But, it causes the bug that button's active state is not restored.
-  // So remove active state class from buttons forcibly.
-  $.mobile.defaultPageTransition   = 'none';
-  $.mobile.defaultDialogTransition = 'none';
-  $(document).on('touchend', '.ui-btn', function (e) {
-    this.removeClass($.mobile.activeBtnClass);
-  });
+  // Apply jQuery Mobile page transition animation effects.
+  $.mobile.defaultPageTransition   = 'slide';
 
   var currentDevice = null; //null = add, not null = edit
   var config = null;

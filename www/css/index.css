@@ -88,3 +88,9 @@ a {
 #image-live-panel-title {
   color: #ffce00 !important;
 }
+
+/* Apply speed of page transition animation */
+.in, .out {
+  -webkit-animation-duration: 200ms !important;
+}
+
