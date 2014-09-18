@@ -89,7 +89,7 @@ a {
   color: #ffce00 !important;
 }
 
-/* Apply speed of page transition animation */
+/* Apply speed of page transition animation. */
 .in, .out {
   -webkit-animation-duration: 200ms !important;
 }
