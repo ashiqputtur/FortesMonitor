@@ -189,9 +189,6 @@ $(document).on('mobileinit', function () {
     $('#user-text').attr('placeholder', mvGetText('user-name'));
     $('#password-text').attr('placeholder', mvGetText('password'));
 
-    if (isPhoneGap)
-      $('#address-text').attr('type', 'url');
-
     $('#device-input-form :input').on('change paste keyup', function () {
       if ($('#name-text').val() === '' ||
           $('#address-text').val() === '' ||
