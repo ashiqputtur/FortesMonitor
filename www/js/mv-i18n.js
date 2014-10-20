@@ -21,7 +21,9 @@
       'display-mode': 'Display Mode',
       'edit-device': 'Edit Device',
       'fill-screen': 'Fill Screen',
+      'focus': 'Focus',
       'http-port': 'HTTP Port',
+      'move': 'Move',
       'name': 'Name',
       'new-device': 'New Device',
       'no': 'No',
@@ -29,12 +31,15 @@
       'password': 'Password',
       'popup-remove-content': 'Do you want to remove this device?',
       'popup-remove-title': 'Remove Device',
+      'preset': 'Preset',
+      'ptz-control': 'PTZ Control',
       'remove': 'Remove',
       'show-header': 'Show Header Information',
       'snapshot-failure': 'Failed to save snapshot image',
       'snapshot-sucess': 'Snapshot image saved',
       'user-name': 'User Name',
-      'yes': 'Yes'
+      'yes': 'Yes',
+      'zoom': 'Zoom'
     },
 
     'ko': {
@@ -52,7 +57,9 @@
       'display-mode': '표시 모드',
       'edit-device': '장비 수정',
       'fill-screen': '화면 채움',
+      'focus': '초점',
       'http-port': 'HTTP 포트 번호',
+      'move': '이동',
       'name': '이름',
       'new-device': '새 장비 추가',
       'no': '아니오',
@@ -60,12 +67,15 @@
       'password': '비밀번호',
       'popup-remove-content': '장비를 목록에서 제거하겠습니까?',
       'popup-remove-title': '장비 제거',
+      'preset': '프리셋',
+      'ptz-control': 'PTZ 제어',
       'remove': '제거',
       'show-header': '상단 정보 표시',
       'snapshot-failure': '스냅 사진을 저장하지 못했습니다.',
       'snapshot-sucess': '스냅 사진을 저장했습니다.',
       'user-name': '사용자 이름',
-      'yes': '예'
+      'yes': '예',
+      'zoom': '확대'
     }
   };
 

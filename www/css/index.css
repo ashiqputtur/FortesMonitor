@@ -71,6 +71,65 @@ a {
   padding: .2em .2em;
 }
 
+/* Set auto change line */
+.inlineblock {
+  display: inline-block;
+}
+
+.ui-controlgroup {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Set the round coner by custom style */
+.topradious {
+  -webkit-border-top-left-radius: .3125em;
+  -webkit-border-top-right-radius: .3125em;
+  border-top-left-radius: .3125em;
+  border-top-right-radius: .3125em;
+}
+.bottomradious {
+  -webkit-border-bottom-left-radius: .3125em;
+  -webkit-border-bottom-right-radius: .3125em;
+  border-bottom-left-radius: .3125em;
+  border-bottom-right-radius: .3125em;
+}
+.toprightradious {
+  -webkit-border-top-right-radius: .3125em;
+  border-top-right-radius: .3125em;
+}
+
+/* Set size of ptz title button */
+.ptz-name-fixed {
+  margin: 0;
+  padding: .7em .1em !important;
+  width: 53px !important;
+}
+
+/* Set size of ptz button */
+.mypadding {
+  margin: 0;
+  padding: .7em .7em !important;
+}
+
+/* Set icon */
+.ui-icon-ptz:after {
+  background-image: url("../images/ptz.png");
+}
+.ui-icon-focus-far:after {
+  background-image: url("../images/focus-far.png");
+}
+.ui-icon-focus-near:after {
+  background-image: url("../images/focus-near.png");
+}
+.ui-icon-focus-auto:after {
+  background-image: url("../images/focus-auto.png");
+}
+.ui-icon-preset-move:after {
+  background-image: url("../images/preset-move.png");
+}
+
 /* Remove the margin and padding of image live content. */
 #image-live-content {
   margin: 0;
@@ -94,3 +153,6 @@ a {
   -webkit-animation-duration: 200ms !important;
 }
 
+#image-live-ptzbox {
+  text-align: center;
+}

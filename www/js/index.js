@@ -23,8 +23,10 @@ $(document).on('mobileinit', function () {
 
     // pause event
     document.addEventListener('pause', function () {
-      if (window.location.hash === '#image-live-page' && imageLive)
+      if (window.location.hash === '#image-live-page' && imageLive) {
         imageLive.stop();
+        ptzstop();
+      }
     }, false);
 
     // resume event
@@ -267,6 +269,7 @@ $(document).on('mobileinit', function () {
   function resizeCanvas(width, height) {
     var $header = $('#image-live-header');
     var $content = $('#image-live-content');
+    var $ptz = $('#image-live-ptzbox');
     if (!width)
       width = $(window).width() -
               ($content.outerWidth() - $content.width());
@@ -277,9 +280,34 @@ $(document).on('mobileinit', function () {
         height -= $header.outerHeight();
       }
     }
-    if (width != canvas.width || height != canvas.height) {
-      canvas.width = width;
-      canvas.height = height;
+    if (width != canvas.width ||
+        height != canvas.height ||
+        !$ptz.hasClass('ui-hidden-accessible')) {
+
+      // Resize the ptz part and canvas size
+      if (!$ptz.hasClass('ui-hidden-accessible')) {
+        if (height > width) {
+          $('[id^=ptz-title-move]').css('display', 'none');
+          $ptz.css('width', $content.width());
+          canvas.width = width;
+          canvas.height = height - $ptz.height();
+        } else {
+          $('[id^=ptz-title-move]').css('display', 'block');
+
+          // Set width of ptzbox by sum width of ptz button
+          var ptzboxWidth = 0;
+          $('#ptzbox-standard').children().children().each(function () {
+            ptzboxWidth = ptzboxWidth + $(this).outerWidth();
+          });
+          $ptz.css('width', ptzboxWidth + 2);
+
+          canvas.width = width - $ptz.width() - 10;
+          canvas.height = height;
+        }
+      } else {
+       canvas.width = width;
+       canvas.height = height;
+      }
       if (imageLive)
         imageLive.relayout(true);
     }
@@ -362,8 +390,40 @@ $(document).on('mobileinit', function () {
     mvDevice.setThumbnail(uuid, saveCanvas.toDataURL());
   }
 
+  // Check status of ptz command whearer it use.
+  var ptzCommandSent = false;
+  // Send ptz stop command to server.
+  function ptzstop() {
+    if (!ptzCommandSent)
+      return;
+    ptzCommandSent = false;
+    $.ajax({
+      url: 'http://' + currentDevice.address +
+           ':' + currentDevice.httpPort +
+           '/ptz/' + (currentCamera -1) + '?' +
+           $.param( {
+             action: 'stop',
+             user: currentDevice.user,
+             password: currentDevice.password,
+           }, true),
+        timeout: 3 * 1000
+    }).done(function (data) {
+    }).fail(function (event) {
+    });
+  }
+
   // Image Live page
   $(document).on('pagecreate', '#image-live-page', function () {
+
+    // Set background-color of content for ptzbox.
+    var headerColor = $('#image-live-header').css('background-color');
+    $('#image-live-content').css('background-color', headerColor);
+
+    // Set size of 'Select' to ptzbox because different size of
+    // 'Select' to G2 and G pro
+    var selectWidth = $('#ptzbox-a-focus-far').outerWidth() +
+                      $('#ptzbox-a-focus-near').outerWidth();
+    $('.ui-select').css('width', selectWidth);
 
     // Save the snapshot image of selected camera to Library or Gallery.
     function saveSnapshotImage() {
@@ -436,23 +496,95 @@ $(document).on('mobileinit', function () {
         imageLive.selectCamera(camera);
     });
     $('#image-live-fill').on('click', function () {
-      var active = !$(this).hasClass('ui-btn-active');
-      if (active)
-        $(this).addClass('ui-btn-active');
-      else
-        $(this).removeClass('ui-btn-active');
       if (imageLive)
-        imageLive.setFill(active);
+        imageLive.setFill(setActive($(this)));
     });
     $('#image-live-show-header').on('click', function () {
-      var active = !$(this).hasClass('ui-btn-active');
-      if (active)
-        $(this).addClass('ui-btn-active');
-      else
-        $(this).removeClass('ui-btn-active');
+      var active = setActive($(this));
       $('#image-live-header').css('display', active ? 'block' : 'none');
       resizeCanvas();
     });
+
+ $('#image-live-ptz').on('click', function () {
+      var active = setActive($(this));
+      if (active) {
+        $('#image-live-ptzbox').removeClass('ui-hidden-accessible');
+        resizeCanvas();
+      } else {
+        $('#image-live-ptzbox').addClass('ui-hidden-accessible');
+        resizeCanvas();
+      }
+    });
+
+    // Send ptz command of use speed.
+    $('#image-live-ptzbox').on('vmousedown', '[id^=ptzbox-a-]', function () {
+      var action = $(this).attr('id').substring(9);
+      $.ajax({
+        url: 'http://' + currentDevice.address +
+             ':' + currentDevice.httpPort +
+             '/ptz/' + (currentCamera -1) + '?' +
+             $.param( {
+               action: action,
+               user: currentDevice.user,
+               password: currentDevice.password,
+               timeout:0
+             }, true),
+        timeout: 3 * 1000
+      }).done(function (data) {
+        ptzCommandSent = true;
+      }).fail(function (event) {
+      });
+    });
+    $('#image-live-ptzbox').on('vmouseup vmouseout', '[id^=ptzbox-a-]', function () {
+      ptzstop();
+    });
+
+    // Send ptz command for less speed.
+    $('#image-live-ptzbox').on('click', '[id^=ptzbox-na-]', function () {
+      var action = $(this).attr('id').substring(10);
+      $.ajax({
+        url: 'http://' + currentDevice.address +
+             ':' + currentDevice.httpPort +
+             '/ptz/' + (currentCamera -1) + '?' +
+             $.param( {
+               action: action,
+               user: currentDevice.user,
+               password: currentDevice.password,
+             }, true),
+        timeout: 3 * 1000
+      }).done(function (data) {
+      }).fail(function (event) {
+      });
+    });
+
+    // Send preset command for ptz.
+    $('#image-live-ptzbox').on('click', '[id^=ptzbox-p-]', function () {
+      var action = $(this).attr('id').substring(9);
+      $.ajax({
+        url: 'http://' + currentDevice.address +
+             ':' + currentDevice.httpPort +
+             '/ptz/' + (currentCamera -1) + '?' +
+             $.param( {
+               action: action,
+               preset: $('#ptzbox-preset-select').val(),
+               user: currentDevice.user,
+               password: currentDevice.password,
+             }, true),
+        timeout: 3 * 1000
+      }).done(function (data) {
+      }).fail(function (event) {
+      });
+    });
+
+    // Set active for button class.
+    function setActive(target) {
+      var active = !target.hasClass('ui-btn-active');
+      if (active)
+        target.addClass('ui-btn-active');
+      else
+        target.removeClass('ui-btn-active');
+      return active;
+    }
 
     // Set click event handlers.
     $(canvas).click(function (e) {
@@ -649,6 +781,7 @@ $(document).on('mobileinit', function () {
     if (!imageLive)
       return;
 
+    ptzstop();
     imageLive.stop();
     imageLive.ondraw = null;
     imageLive.onclear = null;
@@ -657,5 +790,10 @@ $(document).on('mobileinit', function () {
     imageLive.onmodechange = null;
     imageLive.oncamerachange = null;
     imageLive = null;
+  });
+
+  // Set orientationchange event to mobile
+  $(window).on('orientationchange', function(event) {
+    ptzstop();
   });
 });
