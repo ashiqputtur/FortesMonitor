@@ -292,7 +292,7 @@ $(document).on('mobileinit', function () {
           // Set width line up ptz button to small screen.
           if ($content.width() < 345) {
             $('[id^=ptz-group-]').addClass('ui-mini');
-            controlSelectMenu();
+            adjustPTZpresetWidth();
           }
           $ptz.css('width', $content.width());
           canvas.width = width;
@@ -301,7 +301,7 @@ $(document).on('mobileinit', function () {
           $('[id^=ptz-title-move]').css('display', 'block');
           if ($('#ptz-group-a').hasClass('ui-mini')) {
             $('[id^=ptz-group-]').removeClass('ui-mini');
-            controlSelectMenu();
+            adjustPTZpresetWidth();
           }
 
           // Set width of ptz by sum width of ptz button.
@@ -424,10 +424,10 @@ $(document).on('mobileinit', function () {
 
   // Set size of 'Select' to ptz because different size of
   // 'Select' to G2 and G pro.
-  function controlSelectMenu() {
+  function adjustPTZpresetWidth() {
     var selectWidth = $('#ptz-a-focus-far').outerWidth() +
                       $('#ptz-a-focus-near').outerWidth();
-    $('.ui-select').css('width', selectWidth);
+    $('#ptz-preset-select-button').parent().css('width', selectWidth);
   }
 
   // Image Live page
@@ -437,7 +437,7 @@ $(document).on('mobileinit', function () {
     var headerColor = $('#image-live-header').css('background-color');
     $('#image-live-content').css('background-color', headerColor);
 
-    controlSelectMenu();
+    adjustPTZpresetWidth();
 
     // Save the snapshot image of selected camera to Library or Gallery.
     function saveSnapshotImage() {
