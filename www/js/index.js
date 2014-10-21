@@ -290,18 +290,18 @@ $(document).on('mobileinit', function () {
           $('[id^=ptz-title-move]').css('display', 'none');
 
           // Set mini style for width line up ptz button to small screen.
-          $('[id^=ptz-group-]').addClass('ui-mini');
+          $('#image-live-ptz [data-role="controlgroup"]').addClass('ui-mini');
 
           $ptz.css('width', $content.width());
           canvas.width = width;
           canvas.height = height - $ptz.height();
         } else {
           $('[id^=ptz-title-move]').css('display', 'block');
-          $('[id^=ptz-group-]').removeClass('ui-mini');
+          $('#image-live-ptz [data-role="controlgroup"]').removeClass('ui-mini');
 
           // Set width of ptz by sum width of ptz button.
           var ptzWidth = 0;
-          $('#ptz-group-a').children().children().each(function () {
+          $('#image-live-ptz [data-role="controlgroup"]:first').children().children().each(function () {
             ptzWidth = ptzWidth + $(this).outerWidth();
           });
           $ptz.css('width', ptzWidth + 2);
@@ -421,9 +421,9 @@ $(document).on('mobileinit', function () {
   // Set size of 'Select' to ptz because different size of
   // 'Select' to G2 and G pro.
   function adjustPTZpresetWidth() {
-    var selectWidth = $('#ptz-a-focus-far').outerWidth() +
+    var presetWidth = $('#ptz-a-focus-far').outerWidth() +
                       $('#ptz-a-focus-near').outerWidth();
-    $('#ptz-preset-select-button').parent().css('width', selectWidth);
+    $('#ptz-preset-select-button').parent().css('width', presetWidth);
   }
 
   // Image Live page
