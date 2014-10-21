@@ -289,20 +289,15 @@ $(document).on('mobileinit', function () {
         if (height > width) {
           $('[id^=ptz-title-move]').css('display', 'none');
 
-          // Set width line up ptz button to small screen.
-          if ($content.width() < 345) {
-            $('[id^=ptz-group-]').addClass('ui-mini');
-            adjustPTZpresetWidth();
-          }
+          // Set mini style for width line up ptz button to small screen.
+          $('[id^=ptz-group-]').addClass('ui-mini');
+
           $ptz.css('width', $content.width());
           canvas.width = width;
           canvas.height = height - $ptz.height();
         } else {
           $('[id^=ptz-title-move]').css('display', 'block');
-          if ($('#ptz-group-a').hasClass('ui-mini')) {
-            $('[id^=ptz-group-]').removeClass('ui-mini');
-            adjustPTZpresetWidth();
-          }
+          $('[id^=ptz-group-]').removeClass('ui-mini');
 
           // Set width of ptz by sum width of ptz button.
           var ptzWidth = 0;
@@ -314,6 +309,7 @@ $(document).on('mobileinit', function () {
           canvas.width = width - $ptz.width() - 10;
           canvas.height = height;
         }
+        adjustPTZpresetWidth();
       } else {
        canvas.width = width;
        canvas.height = height;
@@ -436,8 +432,6 @@ $(document).on('mobileinit', function () {
     // Set background-color of content for ptz.
     var headerColor = $('#image-live-header').css('background-color');
     $('#image-live-content').css('background-color', headerColor);
-
-    adjustPTZpresetWidth();
 
     // Save the snapshot image of selected camera to Library or Gallery.
     function saveSnapshotImage() {
