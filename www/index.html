@@ -82,19 +82,19 @@
     <canvas class="ui-block-a inlineblock" id="image-live-canvas"></canvas>
     <div class="ui-hidden-accessible ui-block-b inlineblock" id="image-live-ptzbox">
       <div class="inlineblock">
-        <div class="ui-nodisc-icon topradious" data-role="controlgroup" data-type="horizontal" id="ptzbox-standard">
+        <div class="ui-nodisc-icon topradious" data-role="controlgroup" data-type="horizontal" id="ptzbox-standard-a">
           <button class="ptz-name-fixed" id="ptz-title-move-a" data-trans="move" disabled>Move</button>
           <button class="ui-btn ui-icon-arrow-u-l ui-btn-icon-notext mypadding" id="ptzbox-a-left-up">leftup</button>
           <button class="ui-btn ui-icon-arrow-u ui-btn-icon-notext mypadding" id="ptzbox-a-tilt-up">up</button>
           <button class="ui-btn ui-icon-arrow-u-r ui-btn-icon-notext mypadding" id="ptzbox-a-right-up">rightup</button>
         </div>
-        <div class="ui-nodisc-icon" data-role="controlgroup" data-type="horizontal">
+        <div class="ui-nodisc-icon" data-role="controlgroup" data-type="horizontal" id="ptzbox-standard-b">
           <button class="ptz-name-fixed" id="ptz-title-move-b" style="visibility:hidden"></button>
           <button class="ui-btn ui-icon-arrow-l ui-btn-icon-notext mypadding" id="ptzbox-a-pan-left">left</button>
           <a class="ui-btn ui-btn-icon-notext mypadding" style="visibility:hidden"></a>
           <button class="ui-btn ui-icon-arrow-r ui-btn-icon-notext mypadding" id="ptzbox-a-pan-right">right</button>
         </div>
-        <div class="ui-nodisc-icon bottomradious" data-role="controlgroup" data-type="horizontal">
+        <div class="ui-nodisc-icon bottomradious" data-role="controlgroup" data-type="horizontal" id="ptzbox-standard-c">
           <button class="ptz-name-fixed" id="ptz-title-move-c" style="visibility:hidden"></button>
           <button class="ui-btn ui-icon-arrow-d-l ui-btn-icon-notext mypadding" id="ptzbox-a-left-down">leftdown</button>
           <button class="ui-btn ui-icon-arrow-d ui-btn-icon-notext mypadding" id="ptzbox-a-tilt-down">down</button>
@@ -102,19 +102,19 @@
         </div>
       </div>
       <div class="inlineblock">
-        <div class="ui-nodisc-icon topradious" data-role="controlgroup" data-type="horizontal">
+        <div class="ui-nodisc-icon topradious" data-role="controlgroup" data-type="horizontal" data-mini="false" id="ptzbox-standard-d">
           <button class="ptz-name-fixed" data-trans="zoom" disabled>Zoom</button>
           <button class="ui-btn ui-icon-plus ui-btn-icon-notext mypadding" id="ptzbox-a-zoom-tele">zoom-in</button>
           <button class="ui-btn ui-icon-minus ui-btn-icon-notext mypadding toprightradious" id="ptzbox-a-zoom-wide">zoom-out</button>
           <a class="ui-btn ui-btn-icon-notext mypadding" style="visibility:hidden"></a>
         </div>
-        <div class="ui-nodisc-icon toprightradious" data-role="controlgroup" data-type="horizontal">
+        <div class="ui-nodisc-icon toprightradious" data-role="controlgroup" data-type="horizontal" data-mini="false" id="ptzbox-standard-e">
           <button class="ptz-name-fixed" data-trans="focus" disabled>Focus</button>
           <button class="ui-btn ui-icon-focus-far ui-btn-icon-notext mypadding" id="ptzbox-a-focus-far">focus-far</button>
           <button class="ui-btn ui-icon-focus-near ui-btn-icon-notext mypadding" id="ptzbox-a-focus-near">focus-near</button>
           <button class="ui-btn ui-icon-focus-auto ui-btn-icon-notext mypadding" id="ptzbox-na-focus-auto">focus-auto</button>
         </div>
-        <div class="ui-nodisc-icon bottomradious" data-role="controlgroup" data-type="horizontal">
+        <div class="ui-nodisc-icon bottomradious" data-role="controlgroup" data-type="horizontal" data-mini="false" id="ptzbox-standard-f">
           <button class="ptz-name-fixed" data-trans="preset" disabled>Preset</button>
           <select id="ptzbox-preset-select">
             <option value="1">1</option>

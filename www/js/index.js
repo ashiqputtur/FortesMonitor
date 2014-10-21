@@ -288,15 +288,25 @@ $(document).on('mobileinit', function () {
       if (!$ptz.hasClass('ui-hidden-accessible')) {
         if (height > width) {
           $('[id^=ptz-title-move]').css('display', 'none');
+
+          // Set width line up ptz button to small screen
+          if ($content.width() < 345) {
+            $('[id^=ptzbox-standard-]').addClass('ui-mini');
+            controlSelectMenu();
+          }
           $ptz.css('width', $content.width());
           canvas.width = width;
           canvas.height = height - $ptz.height();
         } else {
           $('[id^=ptz-title-move]').css('display', 'block');
+          if ($('#ptzbox-standard-a').hasClass('ui-mini')) {
+            $('[id^=ptzbox-standard-]').removeClass('ui-mini');
+            controlSelectMenu();
+          }
 
           // Set width of ptzbox by sum width of ptz button
           var ptzboxWidth = 0;
-          $('#ptzbox-standard').children().children().each(function () {
+          $('#ptzbox-standard-a').children().children().each(function () {
             ptzboxWidth = ptzboxWidth + $(this).outerWidth();
           });
           $ptz.css('width', ptzboxWidth + 2);
@@ -412,6 +422,14 @@ $(document).on('mobileinit', function () {
     });
   }
 
+  // Set size of 'Select' to ptzbox because different size of
+  // 'Select' to G2 and G pro
+  function controlSelectMenu() {
+    var selectWidth = $('#ptzbox-a-focus-far').outerWidth() +
+                      $('#ptzbox-a-focus-near').outerWidth();
+    $('.ui-select').css('width', selectWidth);
+  }
+
   // Image Live page
   $(document).on('pagecreate', '#image-live-page', function () {
 
@@ -419,11 +437,7 @@ $(document).on('mobileinit', function () {
     var headerColor = $('#image-live-header').css('background-color');
     $('#image-live-content').css('background-color', headerColor);
 
-    // Set size of 'Select' to ptzbox because different size of
-    // 'Select' to G2 and G pro
-    var selectWidth = $('#ptzbox-a-focus-far').outerWidth() +
-                      $('#ptzbox-a-focus-near').outerWidth();
-    $('.ui-select').css('width', selectWidth);
+    controlSelectMenu();
 
     // Save the snapshot image of selected camera to Library or Gallery.
     function saveSnapshotImage() {
@@ -484,8 +498,10 @@ $(document).on('mobileinit', function () {
       if (!m)
         return;
       var mode = parseInt(m[0]);
-      if (imageLive)
+      if (imageLive) {
+        ptzstop();
         imageLive.setMode(mode, mode);
+      }
     });
     $('#image-live-panel').on('click', '[id^=image-live-camera]', function () {
       var c = /\d+/.exec($(this).attr('id'));
@@ -527,7 +543,7 @@ $(document).on('mobileinit', function () {
                action: action,
                user: currentDevice.user,
                password: currentDevice.password,
-               timeout:0
+               timeout: 30000
              }, true),
         timeout: 3 * 1000
       }).done(function (data) {
@@ -601,6 +617,7 @@ $(document).on('mobileinit', function () {
     $(canvas).doubletap(function () {
       if (!imageLive)
         return;
+      ptzstop();
       var m = imageLive.getMode();
       if (m.rows == 1 && m.columns == 1)
         imageLive.setMode(lastMode.columns, lastMode.rows);
