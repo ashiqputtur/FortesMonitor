@@ -269,7 +269,7 @@ $(document).on('mobileinit', function () {
   function resizeCanvas(width, height) {
     var $header = $('#image-live-header');
     var $content = $('#image-live-content');
-    var $ptz = $('#image-live-ptzbox');
+    var $ptz = $('#image-live-ptz');
     if (!width)
       width = $(window).width() -
               ($content.outerWidth() - $content.width());
@@ -284,14 +284,14 @@ $(document).on('mobileinit', function () {
         height != canvas.height ||
         !$ptz.hasClass('ui-hidden-accessible')) {
 
-      // Resize the ptz part and canvas size
+      // Resize the ptz part and canvas size.
       if (!$ptz.hasClass('ui-hidden-accessible')) {
         if (height > width) {
           $('[id^=ptz-title-move]').css('display', 'none');
 
-          // Set width line up ptz button to small screen
+          // Set width line up ptz button to small screen.
           if ($content.width() < 345) {
-            $('[id^=ptzbox-standard-]').addClass('ui-mini');
+            $('[id^=ptz-group-]').addClass('ui-mini');
             controlSelectMenu();
           }
           $ptz.css('width', $content.width());
@@ -299,17 +299,17 @@ $(document).on('mobileinit', function () {
           canvas.height = height - $ptz.height();
         } else {
           $('[id^=ptz-title-move]').css('display', 'block');
-          if ($('#ptzbox-standard-a').hasClass('ui-mini')) {
-            $('[id^=ptzbox-standard-]').removeClass('ui-mini');
+          if ($('#ptz-group-a').hasClass('ui-mini')) {
+            $('[id^=ptz-group-]').removeClass('ui-mini');
             controlSelectMenu();
           }
 
-          // Set width of ptzbox by sum width of ptz button
-          var ptzboxWidth = 0;
-          $('#ptzbox-standard-a').children().children().each(function () {
-            ptzboxWidth = ptzboxWidth + $(this).outerWidth();
+          // Set width of ptz by sum width of ptz button.
+          var ptzWidth = 0;
+          $('#ptz-group-a').children().children().each(function () {
+            ptzWidth = ptzWidth + $(this).outerWidth();
           });
-          $ptz.css('width', ptzboxWidth + 2);
+          $ptz.css('width', ptzWidth + 2);
 
           canvas.width = width - $ptz.width() - 10;
           canvas.height = height;
@@ -422,18 +422,18 @@ $(document).on('mobileinit', function () {
     });
   }
 
-  // Set size of 'Select' to ptzbox because different size of
-  // 'Select' to G2 and G pro
+  // Set size of 'Select' to ptz because different size of
+  // 'Select' to G2 and G pro.
   function controlSelectMenu() {
-    var selectWidth = $('#ptzbox-a-focus-far').outerWidth() +
-                      $('#ptzbox-a-focus-near').outerWidth();
+    var selectWidth = $('#ptz-a-focus-far').outerWidth() +
+                      $('#ptz-a-focus-near').outerWidth();
     $('.ui-select').css('width', selectWidth);
   }
 
   // Image Live page
   $(document).on('pagecreate', '#image-live-page', function () {
 
-    // Set background-color of content for ptzbox.
+    // Set background-color of content for ptz.
     var headerColor = $('#image-live-header').css('background-color');
     $('#image-live-content').css('background-color', headerColor);
 
@@ -521,20 +521,20 @@ $(document).on('mobileinit', function () {
       resizeCanvas();
     });
 
- $('#image-live-ptz').on('click', function () {
+ $('#image-live-show-ptz').on('click', function () {
       var active = setActive($(this));
       if (active) {
-        $('#image-live-ptzbox').removeClass('ui-hidden-accessible');
+        $('#image-live-ptz').removeClass('ui-hidden-accessible');
         resizeCanvas();
       } else {
-        $('#image-live-ptzbox').addClass('ui-hidden-accessible');
+        $('#image-live-ptz').addClass('ui-hidden-accessible');
         resizeCanvas();
       }
     });
 
     // Send ptz command of use speed.
-    $('#image-live-ptzbox').on('vmousedown', '[id^=ptzbox-a-]', function () {
-      var action = $(this).attr('id').substring(9);
+    $('#image-live-ptz').on('vmousedown', '[id^=ptz-a-]', function () {
+      var action = $(this).attr('id').substring(6);
       $.ajax({
         url: 'http://' + currentDevice.address +
              ':' + currentDevice.httpPort +
@@ -551,13 +551,13 @@ $(document).on('mobileinit', function () {
       }).fail(function (event) {
       });
     });
-    $('#image-live-ptzbox').on('vmouseup vmouseout', '[id^=ptzbox-a-]', function () {
+    $('#image-live-ptz').on('vmouseup vmouseout', '[id^=ptz-a-]', function () {
       ptzstop();
     });
 
     // Send ptz command for less speed.
-    $('#image-live-ptzbox').on('click', '[id^=ptzbox-na-]', function () {
-      var action = $(this).attr('id').substring(10);
+    $('#image-live-ptz').on('click', '[id^=ptz-na-]', function () {
+      var action = $(this).attr('id').substring(7);
       $.ajax({
         url: 'http://' + currentDevice.address +
              ':' + currentDevice.httpPort +
@@ -574,15 +574,15 @@ $(document).on('mobileinit', function () {
     });
 
     // Send preset command for ptz.
-    $('#image-live-ptzbox').on('click', '[id^=ptzbox-p-]', function () {
-      var action = $(this).attr('id').substring(9);
+    $('#image-live-ptz').on('click', '[id^=ptz-p-]', function () {
+      var action = $(this).attr('id').substring(6);
       $.ajax({
         url: 'http://' + currentDevice.address +
              ':' + currentDevice.httpPort +
              '/ptz/' + (currentCamera -1) + '?' +
              $.param( {
                action: action,
-               preset: $('#ptzbox-preset-select').val(),
+               preset: $('#ptz-preset-select').val(),
                user: currentDevice.user,
                password: currentDevice.password,
              }, true),

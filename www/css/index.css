@@ -71,8 +71,8 @@ a {
   padding: .2em .2em;
 }
 
-/* Set auto change line */
-.inlineblock {
+/* Set auto change line. */
+.ptz-inline-block {
   display: inline-block;
 }
 
@@ -82,33 +82,33 @@ a {
   margin: 0;
 }
 
-/* Set the round coner by custom style */
-.topradious {
+/* Set the round coner by custom style. */
+.ptz-top-radious {
   -webkit-border-top-left-radius: .3125em;
   -webkit-border-top-right-radius: .3125em;
   border-top-left-radius: .3125em;
   border-top-right-radius: .3125em;
 }
-.bottomradious {
+.ptz-bottom-radious {
   -webkit-border-bottom-left-radius: .3125em;
   -webkit-border-bottom-right-radius: .3125em;
   border-bottom-left-radius: .3125em;
   border-bottom-right-radius: .3125em;
 }
-.toprightradious {
+.ptz-top-right-radious {
   -webkit-border-top-right-radius: .3125em;
   border-top-right-radius: .3125em;
 }
 
-/* Set size of ptz title button */
+/* Set size of ptz title button. */
 .ptz-name-fixed {
   margin: 0;
   padding: .7em .1em !important;
   width: 53px !important;
 }
 
-/* Set size of ptz button */
-.mypadding {
+/* Set size of ptz button. */
+.ptz-button-padding {
   margin: 0;
   padding: .7em .7em !important;
 }
@@ -149,10 +149,11 @@ a {
 }
 
 /* Apply speed of page transition animation. */
-.in, .out {
+.in,
+.out {
   -webkit-animation-duration: 200ms !important;
 }
 
-#image-live-ptzbox {
+#image-live-ptz {
   text-align: center;
 }
