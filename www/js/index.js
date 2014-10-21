@@ -492,10 +492,8 @@ $(document).on('mobileinit', function () {
       if (!m)
         return;
       var mode = parseInt(m[0]);
-      if (imageLive) {
-        ptzstop();
+      if (imageLive)
         imageLive.setMode(mode, mode);
-      }
     });
     $('#image-live-panel').on('click', '[id^=image-live-camera]', function () {
       var c = /\d+/.exec($(this).attr('id'));
@@ -611,7 +609,6 @@ $(document).on('mobileinit', function () {
     $(canvas).doubletap(function () {
       if (!imageLive)
         return;
-      ptzstop();
       var m = imageLive.getMode();
       if (m.rows == 1 && m.columns == 1)
         imageLive.setMode(lastMode.columns, lastMode.rows);
@@ -739,12 +736,14 @@ $(document).on('mobileinit', function () {
       lastMode = currentMode;
       currentMode = mode;
       updateVisibleCameraGroup();
+      ptzstop();
     };
     imageLive.oncamerachange = function (camera) {
       lastCamera = currentCamera;
       currentCamera = camera.id + 1;
       updateActiveCamera();
       updateVisibleCameraGroup();
+      ptzstop();
     };
 
     // Hide canvas before initialization.
