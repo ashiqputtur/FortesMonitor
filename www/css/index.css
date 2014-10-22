@@ -117,18 +117,6 @@ a {
 .ui-icon-ptz:after {
   background-image: url("../images/ptz.png");
 }
-.ui-icon-focus-far:after {
-  background-image: url("../images/focus-far.png");
-}
-.ui-icon-focus-near:after {
-  background-image: url("../images/focus-near.png");
-}
-.ui-icon-focus-auto:after {
-  background-image: url("../images/focus-auto.png");
-}
-.ui-icon-preset-move:after {
-  background-image: url("../images/preset-move.png");
-}
 
 /* Remove the margin and padding of image live content. */
 #image-live-content {
