@@ -288,16 +288,11 @@ $(document).on('mobileinit', function () {
       if (!$ptz.hasClass('ui-hidden-accessible')) {
         if (height > width) {
           $('[id^=ptz-title-move]').css('display', 'none');
-
-          // Set mini style for width line up ptz button to small screen.
-          $('#image-live-ptz [data-role="controlgroup"]').addClass('ui-mini');
-
           $ptz.css('width', $content.width());
           canvas.width = width;
           canvas.height = height - $ptz.height();
         } else {
           $('[id^=ptz-title-move]').css('display', 'block');
-          $('#image-live-ptz [data-role="controlgroup"]').removeClass('ui-mini');
 
           // Set width of ptz by sum width of ptz button.
           var ptzWidth = 0;
@@ -309,7 +304,6 @@ $(document).on('mobileinit', function () {
           canvas.width = width - $ptz.width() - 10;
           canvas.height = height;
         }
-        adjustPTZpresetWidth();
       } else {
        canvas.width = width;
        canvas.height = height;
@@ -771,6 +765,9 @@ $(document).on('mobileinit', function () {
       window.history.back();
       return;
     }
+
+    // Resize width of preset button in ptz.
+    adjustPTZpresetWidth();
 
     // Resize canvas again to apply page elements change.
     resizeCanvas();
