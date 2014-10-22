@@ -113,6 +113,12 @@ a {
   padding: .7em .7em !important;
 }
 
+/* Set round header icon. */
+.header-icon-corner-all {
+  padding: 0.7em 0.9em;
+  border-radius: 2em !important;
+}
+
 /* Set icon */
 .ui-icon-ptz:after {
   background-image: url("../images/ptz.png");
