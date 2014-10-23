@@ -151,3 +151,9 @@ a {
 #image-live-ptz {
   text-align: center;
 }
+
+/* Set show three figures to preset number */
+#ptz-preset-select-button {
+  padding-left: .5em;
+  padding-right: 2em;
+}
