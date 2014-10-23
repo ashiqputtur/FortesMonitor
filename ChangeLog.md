@@ -1,6 +1,13 @@
 NVR Viewer ChangeLog
 ====================
 
+## NVR Viewer 1.3.0 ##
+
+* Add PTZ control
+* Upgrade Phonegap version to 3.6.3
+* Fix some UI bugs
+
+
 ## NVR Viewer 1.2.1 ##
 
 * Fix menu panel not opened with swipe-right in Galaxy S4
