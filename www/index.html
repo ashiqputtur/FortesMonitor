@@ -22,18 +22,13 @@
     <ul data-role="listview" id="device-list-view" data-split-icon="bars">
     </ul>
   </div>
-
-  <div data-role="popup" data-dismissible="false" data-overlay-theme="b" class="ui-content" id="message-popup">
-    <p>message</p>
-    <a href="#" class="ui-btn ui-corner-all" data-rel="back" data-trans="ok">OK</a>
-  </div>
 </div> <!-- device-list-page -->
 
 <div data-role="page" id="device-page">
   <div data-role="header">
     <h2 id="device-title">New Device</h2>
     <a href="#" data-rel="back" data-direction="reverse" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-notext ui-corner-all">Back</a>
-    <a href="#remove-popup" id="device-remove-button" data-trans="remove" data-rel="popup" data-overlay-theme="b" data-position-to="window" class="ui-btn ui-corner-all ui-btn-right">Remove</a>
+    <a href="#" id="device-remove-button" data-trans="remove" data-overlay-theme="b" data-position-to="window" class="ui-btn ui-corner-all ui-btn-right">Remove</a>
   </div>
 
   <div role="main" class="ui-content">
@@ -50,23 +45,6 @@
       <input type="Password" id="password-text" placeholder="Password">    
       <button class="ui-btn ui-corner-all" type="submit" id="device-add-button" disabled>Add</button>
     </form>
-
-  <div data-role="popup" id="remove-popup" data-dismissible="false">
-    <div data-role="header">
-      <h2 data-trans="popup-remove-title">Remove Device</h2>
-    </div>
-    <div role="main" class="ui-content">
-      <p class="ui-title" data-trans="popup-remove-content">Do you want to remove this device?</p>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a">
-          <a href="#device-list-page" id="device-remove-yes-button" data-trans="yes" class="ui-btn ui-corner-all" data-direction="reverse">Yes</a>
-        </div>
-        <div class="ui-block-b">
-          <a href="#" id="device-remove-no-button" data-trans="no" class="ui-btn ui-corner-all" data-rel="back">No</a>
-        </div>
-      </fieldset>
-    </div>
-  </div>
   </div>
   
 </div> <!-- device-page -->

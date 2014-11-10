@@ -130,7 +130,7 @@ $(document).on('mobileinit', function () {
         if (currentDevice)
           return;
 
-        console.log(event.status + ' ' + event.statusText);
+        console.log(event);
 
         if (event.status == 200)
           return;
@@ -151,13 +151,12 @@ $(document).on('mobileinit', function () {
             break;
         }
 
-        $('#message-popup p').html(mvGetText('connect-failure') +
-                                    ': ' +
-                                    event.statusText +
-                                    ' (' + event.status + ')' +
-                                    (msg !== '' ? '<br>' : '') + msg);
-        $('#message-popup').show();
-        $('#message-popup').popup('open', { positionTo: 'window' });
+        navigator.notification.alert(msg +
+                                     (msg !== '' ? '\n' : '') +
+                                     event.statusText +
+                                     ' (' + event.status + ')',
+                                     function () {},
+                                     mvGetText('connect-failure'));
       });
     });
     $('#device-list-view').on('click',
@@ -202,11 +201,21 @@ $(document).on('mobileinit', function () {
         $('#device-add-button').removeAttr('disabled');
       }
     });
-    
-    $('#device-remove-yes-button').click(function () {
-      mvDevice.remove(currentDevice.uuid);
+
+    $('#device-remove-button').click(function () {
+      navigator.notification.confirm(mvGetText('popup-remove-content'),
+                                     function (buttonIndex) {
+                                       if (buttonIndex == 1) {
+                                         mvDevice.remove(currentDevice.uuid);
+                                         $.mobile.pageContainer.pagecontainer('change',
+                                                                              '#device-list-page',
+                                                                              { reverse: true });
+                                       }
+                                     },
+                                     mvGetText('popup-remove-title'),
+                                     [ mvGetText('yes'), mvGetText('no')]);
     });
-        
+
     $('#device-input-form').submit(function (event) {
       event.preventDefault();
       
