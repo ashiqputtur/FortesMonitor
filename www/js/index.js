@@ -618,10 +618,33 @@ $(document).on('mobileinit', function () {
       else
         imageLive.setMode(1, 1);
     });
-    
+
+    // Set swipe left event handlers
+    $(document).on('swipeleft', '#image-live-page', function () {
+      if (!imageLive)
+        return;
+      var m = imageLive.getMode();
+      var totalCamera = m.columns * m.rows;
+      var moveCamera = currentCamera - totalCamera;
+
+      if (moveCamera < 1)
+        moveCamera = config.cameraTotal;
+
+      imageLive.selectCamera(moveCamera - 1);
+    });
+
     // Set swipe right event handlers
     $(document).on('swiperight', '#image-live-page', function () {
-      $('#image-live-panel').panel('open');
+      if (!imageLive)
+        return;
+      var m = imageLive.getMode();
+      var totalCamera = m.columns * m.rows;
+      var moveCamera = currentCamera + totalCamera;
+
+      if (moveCamera > config.cameraTotal)
+        moveCamera = 1;
+
+      imageLive.selectCamera(moveCamera - 1);
     });
 
     // Close the panel on clicking other area.
