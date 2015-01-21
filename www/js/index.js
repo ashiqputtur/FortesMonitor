@@ -625,10 +625,10 @@ $(document).on('mobileinit', function () {
         return;
       var m = imageLive.getMode();
       var totalCamera = m.columns * m.rows;
-      var moveCamera = currentCamera - totalCamera;
+      var moveCamera = currentCamera + totalCamera;
 
-      if (moveCamera < 1)
-        moveCamera = config.cameraTotal;
+      if (moveCamera > config.cameraTotal)
+        moveCamera = 1;
 
       imageLive.selectCamera(moveCamera - 1);
     });
@@ -639,10 +639,10 @@ $(document).on('mobileinit', function () {
         return;
       var m = imageLive.getMode();
       var totalCamera = m.columns * m.rows;
-      var moveCamera = currentCamera + totalCamera;
+      var moveCamera = currentCamera - totalCamera;
 
-      if (moveCamera > config.cameraTotal)
-        moveCamera = 1;
+      if (moveCamera < 1)
+        moveCamera = config.cameraTotal;
 
       imageLive.selectCamera(moveCamera - 1);
     });
