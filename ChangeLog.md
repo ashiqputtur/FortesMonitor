@@ -1,6 +1,13 @@
 NVR Viewer ChangeLog
 ====================
 
+## NVR Viewer 1.3.1 ##
+
+* Add swipe left / right actions to select next / previous cameras
+* Use native dialog UI
+* Fix 3-digits preset number not shown properly
+
+
 ## NVR Viewer 1.3.0 ##
 
 * Add PTZ control
