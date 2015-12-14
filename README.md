@@ -1,9 +1,9 @@
 NVR Viewer
 ==========
 
-You can view live camera images with this mobile viewer from NVR.
+You can view live camera images, control PTZ with this mobile viewer from NVR.
 
-PTZ control, search and other features will be supported in the next version.
+Search and other features will be supported in the next version.
 
 ## Build ##
 
