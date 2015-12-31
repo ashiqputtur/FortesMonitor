@@ -667,7 +667,7 @@ $(document).on('mobileinit', function () {
     // Show only valid mode buttons.
     var element;
     var i;
-    for (i = 1; i <= 10; i++) {
+    for (i = 1; i <= 12; i++) {
       element = $('#image-live-mode-' + i);
       element.css('display', (i <= mm ? 'block' : 'none'));
 
@@ -679,7 +679,7 @@ $(document).on('mobileinit', function () {
     }
 
     // Show only valid camera buttons.
-    for (i = 1; i <= 100; i++) {
+    for (i = 1; i <= 128; i++) {
       element = $('#image-live-camera-' + i);
       element.css('display', (i <= config.cameraTotal ? 'block' : 'none'));
 
