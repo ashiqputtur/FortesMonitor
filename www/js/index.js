@@ -357,6 +357,14 @@ $(document).on('mobileinit', function () {
     var title = config.cameras[currentCamera - 1].name + ' - ' + currentDevice.name;
     $('#image-live-header h2').html(title);
     $('#image-live-panel-title').html(title);
+
+    // Set the RTSP URI
+    var rtspUri =
+      'rtsp://' + currentDevice.user + ':' + currentDevice.password + '@' +
+      currentDevice.address + ':' +
+      (config.rtspPort || '554') +
+      '/video' + currentCamera;
+    $('#image-live-rtsp-connect').attr('href', encodeURI(rtspUri));
   }
 
   function updateVisibleCameraGroup() {
